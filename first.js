@@ -4,8 +4,13 @@ var five = require("johnny-five"),
 
 board.on("ready", function() {
 
-  // Create an Led on pin 13 and strobe it on/off
-  // Optionally set the speed; defaults to 100ms
-  (new five.Led(13)).strobe();
+  var slider = new five.Sensor({
+      pin: "I0",
+      freq: 100
+  });
+
+  slider.scale([0,10]).on("change", function(err, val) {
+    console.log(this.scaled);
+  });
 
 });
