@@ -126,13 +126,23 @@ board.on("ready", function() {
       freq: 250
   });
 
-  // 0 to 3 metres
-  var range = [0,3];
+  var joystick = new five.Joystick({
+    pins: ["I1","I2"],
+    freq: 250
+  });
+
+  board.repl.inject({ joystick: joystick });
+
+  // 0 to 4 metres
+  var range = [0,4];
 
   slider.scale(range).on("change", function(err) {
 
     theDrone.setAltitude(this.scaled);
 
+  });
+
+  joystick.on("axismove", function(err,timestamp) {
   });
 
 });
